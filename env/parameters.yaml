@@ -1,0 +1,12 @@
+adminUser:
+  password: vault:mustangvine/adminUser:password
+  username: admin
+dashboardUrl: https://dashboard.staging-jxaas.live
+enableDocker: false
+pipelineUser:
+  email: arcalos-admin@googlegroups.com
+  token: vault:mustangvine/pipelineUser:token
+  username: cloudbees-ci-cd-staging[bot]
+prow:
+  hmacToken: vault:mustangvine/prow:hmacToken
+segmentWriteKey: vault:mustangvine:segmentWriteKey

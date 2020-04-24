@@ -1,40 +1,105 @@
 autoUpdate:
   enabled: true
-  schedule: '0 0 * * *'
+  schedule: 0 0 * * *
+bootConfigURL: https://github.com/cloudbees/arcalos-boot-config.git
 cluster:
-  clusterName: ""
-  environmentGitOwner: ""
-  project: ""
+  azure: {}
+  chartRepository: http://bucketrepo/bucketrepo/charts/
+  clusterName: mustangvine
+  environmentGitOwner: cb-kubecd
+  environmentGitPublic: true
+  externalDNSSAName: mustangvine-dn
+  gitKind: github
+  gitName: github
+  gitPublic: true
+  gitServer: https://github.com
+  gke:
+    projectNumber: "175712198706"
+  kanikoSAName: mustangvine-ko
+  namespace: jx
+  project: cbjx-mustangvine
   provider: gke
-  zone: ""
-gitops: true
-githubApp:
-  enabled: false
-  url: ""
-  schedule: '0 0 * * *'
+  registry: gcr.io
+  vaultName: mustangvine
+  vaultSAName: mustangvine-vt
+  zone: us-central1-c
 environments:
-- key: dev
-- key: staging
-- key: production
+- ingress:
+    cloud_dns_secret_name: external-dns-gcp-sa
+    domain: cbjx-mustangvine.staging-jxaas.live
+    domainIssuerURL: https://jx-tenant-service-jx.aps-hornberyl.staging-jxaas.live
+    externalDNS: true
+    namespaceSubDomain: -jx.
+    tls:
+      email: jenkins-x@cloudbees.com
+      enabled: true
+      production: false
+  key: dev
+  repository: environment-mustangvine-dev
+- ingress:
+    domain: ""
+    externalDNS: false
+    namespaceSubDomain: ""
+    tls:
+      email: ""
+      enabled: false
+      production: false
+  key: staging
+  repository: environment-mustangvine-staging
+- ingress:
+    domain: ""
+    externalDNS: false
+    namespaceSubDomain: ""
+    tls:
+      email: ""
+      enabled: false
+      production: false
+  key: production
+  repository: environment-mustangvine-production
+githubApp:
+  enabled: true
+  schedule: 0 0 * * *
+  url: https://lighthouse-githubapp-jx.aps-hornberyl.staging-jxaas.live
+gitops: true
 ingress:
-  domain: ""
+  cloud_dns_secret_name: external-dns-gcp-sa
+  domain: cbjx-mustangvine.staging-jxaas.live
+  domainIssuerURL: https://jx-tenant-service-jx.aps-hornberyl.staging-jxaas.live
   externalDNS: true
+  namespaceSubDomain: -jx.
   tls:
     email: jenkins-x@cloudbees.com
     enabled: true
     production: false
 kaniko: true
+repository: bucketrepo
 secretStorage: vault
 storage:
+  backup:
+    enabled: true
+    url: gs://cbjx-mustangvine-backup
   logs:
-    enabled: false
-    url: ""
+    enabled: true
+    url: gs://cbjx-mustangvine-lts
   reports:
     enabled: false
     url: ""
   repository:
-    enabled: false
-    url: ""
+    enabled: true
+    url: gs://cbjx-mustangvine-repository
+vault:
+  aws: {}
+  bucket: cbjx-mustangvine-vault
+  key: mustangvine-561afca14ec5-crypto-key
+  keyring: mustangvine-561afca14ec5-keyring
+  name: mustangvine
+  serviceAccount: mustangvine-vt
 velero:
   namespace: velero
-webhook: prow
+  schedule: ""
+  serviceAccount: mustangvine-vo
+  ttl: ""
+versionStream:
+  ref: v0.0.380
+  url: https://github.com/cloudbees/arcalos-jenkins-x-versions.git
+webhook: lighthouse
