@@ -45,7 +45,9 @@ environments:
       enabled: false
       production: false
   key: staging
-  repository: environment-mustangvine-staging
+  remoteCluster: true
+  owner: cb-kubecd
+  repository: environment-bootv3-stage-saas
 - ingress:
     domain: ""
     externalDNS: false
