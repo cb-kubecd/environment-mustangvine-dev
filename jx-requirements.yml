@@ -44,18 +44,6 @@ environments:
       email: ""
       enabled: false
       production: false
-  key: staging
-  remoteCluster: true
-  owner: cb-kubecd
-  repository: environment-bootv3-stage-saas
-- ingress:
-    domain: ""
-    externalDNS: false
-    namespaceSubDomain: ""
-    tls:
-      email: ""
-      enabled: false
-      production: false
   key: production
   repository: environment-mustangvine-production
 githubApp:
