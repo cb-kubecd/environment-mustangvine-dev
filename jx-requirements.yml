@@ -90,6 +90,6 @@ velero:
   serviceAccount: mustangvine-vo
   ttl: ""
 versionStream:
-  ref: v0.0.380
+  ref: v0.0.392
   url: https://github.com/cloudbees/arcalos-jenkins-x-versions.git
 webhook: lighthouse
